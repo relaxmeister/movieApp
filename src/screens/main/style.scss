@@ -1,0 +1,43 @@
+.pageContainer {
+  padding-top: 64px;
+  width: 100%;
+  max-width: 1248px;
+  margin: auto;
+  .welcomeContainer {
+    width: 100%;
+    background-image: url(https://cdn.cms-twdigitalassets.com/content/dam/careers-twitter/jobs/jobsmasterhead.jpg);
+    background-color: lightblue;;
+    background-position: 50% 50%;
+    background-size: cover;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    p {
+      padding-top: 60px;
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 30px;
+    }
+    .inputWrapper {
+      border-radius: 30px;
+      // border: solid 1px black;
+      height: 46px;
+      display: flex;
+      flex-direction: row;
+      background-color: white;
+      input {
+        padding: 0 20px;
+        width: 100%;
+        border-radius: inherit;
+      }
+      .searchButton {
+        padding: 0px 30px;
+        border-radius: 30px;
+        color: white;
+        background-color: red;
+        cursor: pointer;
+      }
+    }
+  }
+}

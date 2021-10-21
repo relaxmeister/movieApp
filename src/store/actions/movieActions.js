@@ -1,9 +1,31 @@
-import {
-    JOBS_FETCH_SUCCESS,
-    JOBS_FETCH_FAIL,
-  } from "./types";
-  
-  /*
+import { JOBS_FETCH_SUCCESS, JOBS_FETCH_FAIL } from "./types";
+
+export const fetchMovies = () => {
+  return (dispatch) => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_v3_auth}&language=en-US&page=1`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          'Content-Type': 'application/json;charset=utf-8',
+          //"Access-Control-Allow-Origin": "*",
+          //"Access-Control-Request-Headers": "*",
+        },
+      }
+    )
+      .then(async (response) => {
+        console.log("resp", response);
+      })
+      .then((result) => {
+        console.log("res", result);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
+};
+/*
   export const logoutUser = () => {
     return dispatch => {
       dispatch({ type: JOBS_FETCH_SUCCESS });

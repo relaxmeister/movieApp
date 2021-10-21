@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   error: "",
 };
 
-export default (state = INITIAL_STATE, action) => {
+export const movieReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case MOVIES_FETCH_SUCCESS:
       return {
