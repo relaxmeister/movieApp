@@ -1,30 +1,20 @@
-# Getting Started with Create React App
+# SEARCH AND RENDER A LIST OF MOVIES 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## GOAL
 
-## Available Scripts
+Using a public API to fetch data and render it in paginated way.
+User has the ability to add movies to favorite and or to "watch later" - however, this is only for show.
 
-In the project directory, you can run:
+## NOTE
 
-### `yarn start`
+As always, normal rules apply: You break it, you buy it.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## USEAGE
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+clone
 
-### `yarn test`
+yarn install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+yarn start
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## END
