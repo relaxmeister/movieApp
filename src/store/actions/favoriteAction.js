@@ -1,7 +1,5 @@
 import { ADD_FAVORITE, REMOVE_FAVORITE } from "./types";
 
-export const toggleFavorite = () => {};
-
 export const addToFavoriteList = (movie) => {
   return {
     type: ADD_FAVORITE,

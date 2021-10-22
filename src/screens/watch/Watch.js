@@ -1,21 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import LaterCard from "../../components/testCard/testCard";
+import MovieCard from "../../components/movieCard/MovieCard";
 
 import "./style.scss";
 
-
 const Watch = (props) => {
-  useEffect(() => {
-  }, []);
+  const renderMovies = () => {
+    return props.watch.map((e) => {
+      return <MovieCard movie={e} key={e.id} />;
+    });
+  };
 
-  const renderWatchLaterMovies = () => {
-    return props.watch.map(e => {
-      return <LaterCard movie={e} key={e.id}/>
-    })
-  }
-
-  return <div className="">LATER {renderWatchLaterMovies()}</div>;
+  return (
+    <div className="pageContainer">
+      <div className="widthDefault">
+        <div className="moviesWrapper">{renderMovies()}</div>
+      </div>
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => ({

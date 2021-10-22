@@ -1,7 +1,7 @@
 import {
   BrowserRouter as Router,
   Route,
-  withRouter,
+  Redirect,
   Switch,
 } from "react-router-dom";
 import Main from "./screens/main/Main";
@@ -16,7 +16,10 @@ function App() {
     <Router>
       <Header />
       <Switch>
-        <Route exact path={"/"} component={Main} />
+        <Route exact path={"/"}>
+          <Redirect to="/home" />
+        </Route>
+        <Route exact path={"/home"} component={Main} />
         <Route exact path={"/fave"} component={Favorite} />
         <Route exact path={"/watch"} component={Watch} />
         <Route path="*" component={NotFound} />

@@ -1,76 +1,75 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import TestCard from "../../components/testCard/testCard";
+import Pagination from "react-js-pagination";
+import MovieCard from "../../components/movieCard/MovieCard";
 import { fetchMovies } from "../../store/actions";
 
 import "./style.scss";
 
 const Main = (props) => {
-  const [movieList, setMovieList] = useState([]);
   const [searchString, setSearchString] = useState("");
-  useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_v3_auth}&language=en-US&page=1&include_adult=false&query=kek`,
-      {
-        method: "GET",
-      }
-    )
-      .then(async (response) => {
-        console.log("resp", response);
-        if (response.ok) {
-          return response.json();
-        } else {
-          console.log("something went wrong with the search!");
-        }
-      })
-      .then((result) => {
-        console.log("res", result);
-        setMovieList([...result.results]);
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  }, []);
-
-  useEffect(() => {
-    console.log("query", searchString);
-  }, [searchString]);
+  const [activePage, setActivePage] = useState(1);
 
   const renderMovies = () => {
-    return movieList.map((e) => {
-      return <TestCard movie={e} key={e.id} />;
-    });
+    if (props.movies.pagination.total_results > 0) {
+      return props.movies.pagination.results.map((e) => {
+        return <MovieCard movie={e} key={e.id} />;
+      });
+    }
+  };
+
+  const renderPaginator = () => {
+    if (props.movies.pagination.total_results > 0) {
+      return (
+        <div className="paginationWrapper">
+          <Pagination
+            activePage={activePage}
+            itemsCountPerPage={20}
+            totalItemsCount={props.movies.pagination.total_results}
+            pageRangeDisplayed={5}
+            onChange={(e) => handlePageChange(e)}
+          />
+        </div>
+      );
+    }
   };
 
   const onPressSearch = () => {
     if (searchString.length > 0) {
-      console.log("clicked");
+      props.fetchMovies(searchString, 1);
+      setActivePage(1);
     }
-  }
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setActivePage(pageNumber);
+    props.fetchMovies(searchString, pageNumber);
+  };
 
   return (
     <div className="pageContainer">
       <div className="welcomeContainer">
         <p>FIND THE MOVIES THAT YOU KEEP DREAMING ABOUT</p>
         <div className="inputWrapper">
-          <input onChange={(e) => setSearchString(e.target.value)} />
-          <button
-            className="searchButton"
-            onClick={() => onPressSearch()}
-          >
+          <input
+            onChange={(e) => setSearchString(e.target.value)}
+            placeholder="Sök efter en film, tv-serie, person..."
+          />
+          <button className="searchButton" onClick={() => onPressSearch()}>
             Search
           </button>
         </div>
       </div>
-      MAIN {renderMovies()}
+      <div className="widthDefault">
+        <div className="moviesWrapper">{renderMovies()}</div>
+      </div>
+      {renderPaginator()}
     </div>
   );
 };
 
-// export default Main;
-
 const mapStateToProps = (state) => ({
-  job: state.job,
+  movies: state.movies,
 });
 
 export default connect(mapStateToProps, { fetchMovies })(Main);

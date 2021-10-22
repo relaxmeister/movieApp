@@ -1,67 +1,32 @@
-import { JOBS_FETCH_SUCCESS, JOBS_FETCH_FAIL } from "./types";
+import { MOVIES_FETCH_SUCCESS, MOVIES_FETCH_FAIL } from "./types";
 
-export const fetchMovies = () => {
+export const fetchMovies = (inputString, page) => {
   return (dispatch) => {
     fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_v3_auth}&language=en-US&page=1`,
+      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_v3_auth}&language=en-US&page=${page}&include_adult=false&query=${inputString}`,
       {
         method: "GET",
         headers: {
           Accept: "application/json",
-          'Content-Type': 'application/json;charset=utf-8',
-          //"Access-Control-Allow-Origin": "*",
-          //"Access-Control-Request-Headers": "*",
+          "Content-Type": "application/json;charset=utf-8",
         },
       }
     )
       .then(async (response) => {
         console.log("resp", response);
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Something went wrong');
+        }
       })
       .then((result) => {
         console.log("res", result);
+        dispatch({ type: MOVIES_FETCH_SUCCESS, payload: result });
       })
       .catch((err) => {
         console.log("err", err);
+        dispatch({ type: MOVIES_FETCH_FAIL });
       });
   };
 };
-/*
-  export const logoutUser = () => {
-    return dispatch => {
-      dispatch({ type: JOBS_FETCH_SUCCESS });
-    }
-  };
-  
-  /*
-  export const loginUser = (data) => {
-    return dispatch => {
-      fetch("https://api.themoviedb.org/3/movie/22?api_key=xxx&language=en-US", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          //"Authorization": `Bearer: ${"HEJ"}`
-        }
-      })
-        .then(async response => {
-          if (response.status >= 200 && response.status < 300) {
-            console.log("REDUX LOGIN");
-            return response.json();
-          } else {
-            var error = new Error(response.statusText || response.status)
-            error.response = response
-            return Promise.reject(error)
-          }
-        })
-        .then(result => {
-          console.log("LOGIN", result);
-          dispatch({ type: LOGIN_USER_SUCCESS, payload: result }); // verkar köra den oavsett 404
-        })
-        .catch(err => {
-          console.log("err", err);
-          dispatch({ type: LOGIN_USER_FAIL });
-        });
-    };
-  };*/
