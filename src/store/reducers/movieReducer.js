@@ -11,14 +11,6 @@ const INITIAL_STATE = {
   error: "",
 };
 
-/*
-  page: undefined,
-  total_pages: undefined,
-  total_results: 0,
-  // query: '',
-  results: [],
-*/
-
 export const movieReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case MOVIES_FETCH_SUCCESS:

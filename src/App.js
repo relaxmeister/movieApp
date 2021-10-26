@@ -23,7 +23,6 @@ function App() {
         <Route exact path={"/fave"} component={Favorite} />
         <Route exact path={"/watch"} component={Watch} />
         <Route path="*" component={NotFound} />
-        {/** Alt att redirecta tbax till förstasidan */}
       </Switch>
     </Router>
   );

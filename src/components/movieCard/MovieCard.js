@@ -12,12 +12,7 @@ import favImg from "./../../assets/imgs/starYellow.png";
 import unFavImg from "./../../assets/imgs/starGrey.png";
 
 import "./style.scss";
-// SOM JAG GJORT DET NU MÅSTE "IS STAR YUELLOW" VARA BEROENDE PÅ FAVE-ARRAYEN
 
-/*
-
-
-*/
 const MovieCard = (props) => {
   const isFavorite = props.fave.some((e) => {
     return e.id === props.movie.id;
